@@ -1,3 +1,3 @@
-FC = input("Mikä sinun nimesi on?")
-print(f' Hei {FC}!')
+nimi = input("Mikä sinun nimesi on? ")
+print(f' Hei {nimi}')
 
