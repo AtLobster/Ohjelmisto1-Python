@@ -1,0 +1,2 @@
+print ("Hei, Atte Sten!")
+
