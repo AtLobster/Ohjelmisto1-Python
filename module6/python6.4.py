@@ -7,6 +7,7 @@ def listsum(num):
         if num != "":
             numlist.append(int(num))
     summa = sum(numlist)
+    print(numlist)
 
     return summa
 

@@ -11,9 +11,3 @@ kilot = kokoMassa // 1000
 grammat = kokoMassa - kilot * 1000
 
 print(f'Massa nykymitoissa on {kilot: .0f}kg ja {grammat: .1f}g.')
-
-
-
-
-
-
