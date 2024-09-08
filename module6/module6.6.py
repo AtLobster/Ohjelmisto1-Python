@@ -28,4 +28,3 @@ def abc():
     return
 
 abc()
-
