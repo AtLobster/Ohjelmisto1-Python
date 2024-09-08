@@ -29,24 +29,3 @@ def abc():
 
 abc()
 
-
-
-"""
-hinta = input("Paljonko pizza maksoi euroina: ")
-r2 = input("Kerro pizzan halkaisija: ")
-suhde = hintasuhde(hinta, r2)
-
-print(f'Ensimmäisen pizzan hinta on {suhde} euroa per neliömetri. ')
-"""
-"""
-hinta2 = input("Paljonko pizza maksoi euroina:  ")
-r22 = input("Kerro pizzan halkaisija: ")
-suhde2 = hintasuhde(hinta, r2)
-
-print(f'Toisen pizzan hinta on {suhde} euroa per neliömetri. ')
-
-if suhde2 > suhde:
-    print(f'Toisen pizzan hinta-määrä suhde on parempi.')
-if suhde2 < suhde:
-    print(f'Ensimmäkisen pizzan hinta-määrä suhde on parempi.')
-"""
