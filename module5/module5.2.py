@@ -9,4 +9,6 @@ while luku != "":
 
 if luku == "":
     luvut.sort(reverse=True)
-    print(f'{luvut}')
+
+suurimmat = luvut[:5]
+print(f'{suurimmat}')

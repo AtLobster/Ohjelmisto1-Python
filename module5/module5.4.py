@@ -5,4 +5,7 @@ for i in range(5):
     cities.append(city)
     i += 1
 
-print(cities[:6])
+print("Listaamasi kaupungit ovat: ")
+for city in cities:
+    print(city)
+
