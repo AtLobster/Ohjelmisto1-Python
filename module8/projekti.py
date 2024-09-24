@@ -1,9 +1,10 @@
-
+import random
 import databases
+from geopy.distance import great_circle
 
 def randomAirport():
     sql = """
-    SELECT airport.name, country.name 
+    SELECT airport.name, country.name, latitude_deg, longitude_deg 
     FROM airport 
     JOIN country ON airport.iso_country = country.iso_country 
     WHERE airport.type LIKE 'large_airport%' 
@@ -17,16 +18,18 @@ def randomAirport():
     #Halutaan ulos satunnaisen lentokentän nimi ja maa
     airportName = randAirport[0][0]
     countryName = randAirport[0][1]
+    startPointLat = randAirport[0][2]
+    startPointLon = randAirport[0][3]
 
     #print(airportName, countryName)
-    return airportName, countryName
+    return airportName, countryName, startPointLat, startPointLon
 
 def wrongCountry(exceptionCountry):
     sql = """
     SELECT DISTINCT country.name
     from country
     JOIN airport ON country.iso_country = airport.iso_country
-    WHERE airport.type LIKE 'large_airport%' AND country.name != '{exceotionCountry}'
+    WHERE airport.type LIKE 'large_airport%' AND country.name != '{exceptionCountry}'
     ORDER BY rand()
     LIMIT 5
     """
@@ -38,13 +41,14 @@ def wrongCountry(exceptionCountry):
 
     return [country[0] for country in wrongCountries]
 
-airportName, countryName = randomAirport()
+
+airportName, countryName, startPointLat, startPointLon = randomAirport()
 muuMaaMustikka = wrongCountry(countryName)
 
-countryChoices = []
-countryChoices.append(countryName)
-countryChoices.append(muuMaaMustikka)
+countryChoices = [countryName] + muuMaaMustikka
+random.shuffle(countryChoices)
 
+print(countryName)
 print(countryChoices)
 
 """
