@@ -42,13 +42,12 @@ def wrongCountry(exceptionCountry):
 
     return [(country[0], country[1], country[2]) for country in wrongCountries]
 
-def distance():
+def distance(startPoint, destPoint):
 
-    alku = (40.7128, -74.0060)
-    loppu = (34.0522, -118.2437)
+    alku = (startPoint)
+    loppu = (destPoint)
 
     dist = great_circle(alku, loppu).kilometers
-    print(dist)
 
     return dist
 
@@ -64,23 +63,19 @@ print(f'Starting point: {airportName}, ({startLat}, {startLon})')
 
 for country in wNamesAndCoords:
     destName = country[0]
-    destLat = country[1]
-    destLon = country[2]
-    print(f'End point: {destName}, ({destLat}, {destLon})')
+    destPoint = (country[1], country[2])
+    distancefrom = distance(startPoint, destPoint)
+    print(f'Maassa {destName} sijaitsevan lentokentän etäisyys lähtöpisteestä on {distancefrom: .0f}km. Päätepisteen koordinaatit ovat {destPoint}. ')
 
 print(countryChoices)
 
 
 
 """
-Pitää järjestää countryChoices lista random järjestyksesen ettei oikea 
-ole aina ekana.
-Tehä kommentit.
+
+Teeppä kommentit.
 tehdä tapa että pelaaja voi valita noista vaihtoehdoista
-muita juttuja en jake pohtia brian :D
+muita juttuja en jake pohtia
 
 """
 
-
-#print(f"Valitun lentokentän nimi {airportName} ja sijainti {countryName}.")
-#print(f"Väärät vaihtoehdot: {muuMaaMustikka}")
