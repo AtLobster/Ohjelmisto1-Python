@@ -2,64 +2,80 @@ import random
 import databases
 from geopy.distance import great_circle
 
-def randomAirport():
+#KESKEENNNENENENENE
+
+
+def getrandomAp():
 
     sql = """
-    SELECT airport.name, country.name, latitude_deg, longitude_deg 
+    SELECT airport.name aName, country.name cName, latitude_deg, longitude_deg 
     FROM airport 
     JOIN country ON airport.iso_country = country.iso_country 
     WHERE airport.type LIKE 'large_airport%' 
     ORDER BY rand() 
     LIMIT 1"""
-    #Valitaan satunnainen lentokenttä ja maa, jossa lentokenttä sijaitsee
-    cursor = databases.conn.cursor()
+
+    cursor = databases.conn.cursor(dictionary=True)
     cursor.execute(sql)
 
-    #Halutaan ulos satunnaisen lentokentän nimi ja maa
     randAirport = cursor.fetchall()
-    airportName = randAirport[0][0]
-    countryName = randAirport[0][1]
-    startPoint = (randAirport[0][2], randAirport[0][3])
+    if randAirport: #Ettei ole olematon tulos, poistanko?
+        columnNames = randAirport[0].keys()
 
-    #print(airportName, countryName)
-    return airportName, countryName, startPoint
+    aName = randAirport[0]['aName']
+    cName = randAirport[0]['cName']
+    startPoint = randAirport[0]['latitude_deg'], randAirport[0]['longitude_deg']
 
-def wrongCountry(exceptionCountry):
+    #print(aName, cName, startPoint)
+
+    return aName, cName, startPoint
+
+
+
+def wrongCountry():
 
     sql = """
     SELECT DISTINCT country.name, latitude_deg, longitude_deg
     from country
     JOIN airport ON country.iso_country = airport.iso_country
-    WHERE airport.type LIKE 'large_airport%' AND country.name != '{exceptionCountry}'
+    WHERE airport.type LIKE 'large_airport%' 
     ORDER BY rand()
     LIMIT 5
     """
-    cursor = databases.conn.cursor()
+
+    cursor = databases.conn.cursor(dictionary=True)
     cursor.execute(sql)
+    fivewrongCountries = cursor.fetchall()
 
-    wrongCountries = cursor.fetchall()
-    endPoints = (wrongCountries[0][1], wrongCountries[0][2])
+    if fivewrongCountries:
+        columnNames = fivewrongCountries[0:5].keys()
+        print(columnNames)
 
-    return [(country[0], country[1], country[2]) for country in wrongCountries]
+    for i, row in enumerate(fivewrongCountries, start=1):
+        print(f"Row {i}: {row}")
+
+    return
+
+wrongCountry()
 
 def distance(startPoint, destPoint):
 
     alku = (startPoint)
     loppu = (destPoint)
-
     dist = great_circle(alku, loppu).kilometers
 
     return dist
 
-airportName, countryName, startPoint = randomAirport()
-wNamesAndCoords = wrongCountry(countryName)
+"""
+aName, cName, startPoint = getrandomAp()
+wNamesAndCoords = wrongCountry(cName)
 wNames = [country[0] for country in wNamesAndCoords]
 
-countryChoices = [countryName] + wNames
+countryChoices = [cName] + wNames
 random.shuffle(countryChoices)
 
 startLat, startLon = startPoint
-print(f'Starting point: {airportName}, ({startLat}, {startLon})')
+print(f'Starting point: {cName}, {aName}, ({startLat}, {startLon})\n')
 
 for country in wNamesAndCoords:
     destName = country[0]
@@ -67,8 +83,8 @@ for country in wNamesAndCoords:
     distancefrom = distance(startPoint, destPoint)
     print(f'Maassa {destName} sijaitsevan lentokentän etäisyys lähtöpisteestä on {distancefrom: .0f}km. Päätepisteen koordinaatit ovat {destPoint}. ')
 
-print(countryChoices)
-
+print(f"\n{countryChoices}")
+"""
 
 
 """
@@ -76,6 +92,16 @@ print(countryChoices)
 Teeppä kommentit.
 tehdä tapa että pelaaja voi valita noista vaihtoehdoista
 muita juttuja en jake pohtia
+
+seuraavaks pitää tehä logiikka et toi valitsee vääristä maista x määrän y etäisyyden päästä. 
+
+
+jossai vaiheessa muuta randairport ja wrongcountries 1 funktioksi 
+sen pitäisi valita yksi niistä olemaan aloitus paikka.
+hmm
+
+muuta for country looppi funktioksi joka tuottaa listan sekalaisessa 
+järj.
 
 """
 
