@@ -2,7 +2,7 @@ import sys
 
 class Hissi:
 
-    kerros = 0
+    kerros = 2
 
     def __init__(self, alin_kerros, ylin_kerros):
         self.alin_kerros = alin_kerros
@@ -22,14 +22,14 @@ class Hissi:
             self.kerros_alas()
 
 
-        return
+
 
     def kerros_ylos(self):
         if self.kerros < self.ylin_kerros:
             self.kerros += 1
             print(f"Hissi on kerroksessa {self.kerros}.")
 
-        return
+
 
     def kerros_alas(self):
         if self.kerros > self.alin_kerros:
@@ -37,7 +37,7 @@ class Hissi:
 
             print(f"Hissi on kerroksessa {self.kerros}.")
 
-        return
+
 
 class Talo:
     def __init__(self, alin_kerros, ylin_kerros, hissi_lkm):
@@ -54,6 +54,18 @@ class Talo:
             print("Virhe")
             sys.exit()
 
+    def palohalytys(self):
+
+        print(f"\nHÄLYTYS HÄLYTYS TALOSSA PALAA!")
+
+        for i,hissi in enumerate(self.hissit):
+            print(f"\nHissi{i+1} siirtyy alimpaan kerrokseen!!!")
+            hissi.siirry_kerrokseen(self.hissit[0].alin_kerros)
+
+        print(f"🔥🔥🔥\n🔥🔥🔥\n🔥🛖🔥")
+
+
+
 
 
 
@@ -61,6 +73,7 @@ talo = Talo(0, 10, 4)
 
 talo.aja_hissia(3, 8) #Saatavilla olevat hissit ovat 0 -> hissi_lkm -1
 
+talo.palohalytys()
 
 #h = Hissi(0, 10)
 #h.siirry_kerrokseen(4)

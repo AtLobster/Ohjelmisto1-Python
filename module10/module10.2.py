@@ -22,14 +22,14 @@ class Hissi:
             self.kerros_alas()
 
 
-        return
+
 
     def kerros_ylos(self):
         if self.kerros < self.ylin_kerros:
             self.kerros += 1
             print(f"Hissi on kerroksessa {self.kerros}.")
 
-        return
+
 
     def kerros_alas(self):
         if self.kerros > self.alin_kerros:
@@ -37,7 +37,7 @@ class Hissi:
 
             print(f"Hissi on kerroksessa {self.kerros}.")
 
-        return
+
 
 class Talo:
     def __init__(self, alin_kerros, ylin_kerros, hissi_lkm):

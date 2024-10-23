@@ -1,5 +1,5 @@
 import random
-from tarfile import GNU_FORMAT
+
 
 
 class Auto: #Aika merkittävä tunneissa.
