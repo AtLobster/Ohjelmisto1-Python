@@ -33,7 +33,7 @@ class Kilpailu:
             auto.kulje(1)
 
     def tulosta_tilanne(self):
-        print(f"{'Rekisteri':<10} {'Nopeus':<10} {'Matka':<10}")
+        print(f"{'Auto':<10} {'Nopeus':<10} {'Matka':<10}")
         for auto in self.autot:
             print(f"{auto.rek:<10} {auto.nopeus:<10} {auto.kMatka:<10}")
 
