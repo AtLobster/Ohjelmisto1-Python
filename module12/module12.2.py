@@ -2,7 +2,7 @@ import json
 import requests
 
 city = input("Enter which citys' weather you'd like to see:  ")
-apikey = "01a80f826f649a6d231ac5ee3a997d4f"
+apikey = "lul"
 
 coords = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit={1}&appid={apikey}"
 kaupunki_info = requests.get(coords).json()
