@@ -31,6 +31,6 @@ def hae_lentokentan_tiedot(icao):
         return jsonify(vastaus)
 
 
-"""
+
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=3000)"""
+    app.run(host='127.0.0.1', port=3000)
